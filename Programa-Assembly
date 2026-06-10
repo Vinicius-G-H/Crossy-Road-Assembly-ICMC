@@ -37,7 +37,7 @@
         
 
            
-        ; ========================================
+        ; ======================================
         ; --- Espaço de Memória ---
         ; Variáveis globais do jogo alocadas em memória estática.
         ; Cada 'var #1' reserva uma célula de memória.
@@ -585,7 +585,7 @@ fim_colisao:
         inc r0
         store y_delay_cnt, r0
 
-        loadn r5, #1   
+        loadn r5, #70   
         load r6, game_speed
         sub r5, r5, r6
 
@@ -681,7 +681,7 @@ y_ok:
         inc r0
         store y2_delay_cnt, r0
 
-        loadn r5, #1   
+        loadn r5, #70   
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -758,7 +758,7 @@ y2_ok:
         inc r0
         store y3_delay_cnt, r0
 
-        loadn r5, #1   
+        loadn r5, #70   
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -834,7 +834,7 @@ y3_ok:
         load r0, z_delay_cnt
         inc r0
         store z_delay_cnt, r0
-        loadn r5, #2
+        loadn r5, #60
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -913,7 +913,7 @@ z_skip_wrap2:
         inc r0
         store z2_delay_cnt, r0
 
-        loadn r5, #2   
+        loadn r5, #60   
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -990,7 +990,7 @@ z2_ok:
         inc r0
         store z3_delay_cnt, r0
 
-        loadn r5, #2   
+        loadn r5, #60   
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1066,7 +1066,7 @@ z3_ok:
         load r0, h_delay_cnt
         inc r0
         store h_delay_cnt, r0
-        loadn r5, #4
+        loadn r5, #80
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1145,7 +1145,7 @@ h_skip_wrap2:
         inc r0
         store h2_delay_cnt, r0
 
-        loadn r5, #4   
+        loadn r5, #80   
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1222,7 +1222,7 @@ h2_ok:
         inc r0
         store h3_delay_cnt, r0
 
-        loadn r5, #4   
+        loadn r5, #80   
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1298,7 +1298,7 @@ h3_ok:
         load r0, k_delay_cnt
         inc r0
         store k_delay_cnt, r0
-        loadn r5, #3
+        loadn r5, #90
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1420,7 +1420,7 @@ k_skip_wrap2:
         load r0, k2_delay_cnt
         inc r0
         store k2_delay_cnt, r0
-        loadn r5, #3
+        loadn r5, #90
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1542,7 +1542,7 @@ k2_skip_wrap2:
         load r0, k3_delay_cnt
         inc r0
         store k3_delay_cnt, r0
-        loadn r5, #3
+        loadn r5, #90
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1664,7 +1664,7 @@ k3_skip_wrap2:
         load r0, u_delay_cnt
         inc r0
         store u_delay_cnt, r0
-        loadn r5, #5
+        loadn r5, #100
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1788,7 +1788,7 @@ u_skip_wrap2:
         load r0, u2_delay_cnt
         inc r0
         store u2_delay_cnt, r0
-        loadn r5, #5
+        loadn r5, #100
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -1911,7 +1911,7 @@ u2_skip_wrap2:
         load r0, u3_delay_cnt
         inc r0
         store u3_delay_cnt, r0
-        loadn r5, #5
+        loadn r5, #100
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -2034,7 +2034,7 @@ u3_skip_wrap2:
         load r0, q_delay_cnt
         inc r0
         store q_delay_cnt, r0
-        loadn r5, #2
+        loadn r5, #90
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -2113,7 +2113,7 @@ q_skip_wrap2:
         inc r0
         store q2_delay_cnt, r0
 
-        loadn r5, #2   
+        loadn r5, #90   
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -2190,7 +2190,7 @@ q2_ok:
         inc r0
         store q3_delay_cnt, r0
 
-        loadn r5, #2   
+        loadn r5, #90  
         load r6, game_speed
         sub r5, r5, r6
         loadn r6, #1
@@ -7875,39 +7875,3 @@ printtela4Screen:
   pop R0
   rts
     
-    ;TELA BASE 
-    
-    ; =========================================================
-    ; SUBROTINA: get_tela_base
-    ; =========================================================
-    ; Retorna em r5 o endereço base do array da tela ativa.
-    ; Entrada: tela_atual (variável global, valor 0..3)
-    ; Saída:   r5 = endereço base (tela1, tela2, tela3 ou tela4)
-    ; Usada internamente para calcular o endereço de um tile:
-    ;   endereço_tile = base_tela + pos_linear
-    ; =========================================================
-get_tela_base:
-    push r0
-    load r0, tela_atual
-    loadn r5, #1
-    cmp r0, r5
-    jeq gb_tela2
-    loadn r5, #2
-    cmp r0, r5
-    jeq gb_tela3
-    loadn r5, #3
-    cmp r0, r5
-    jeq gb_tela4
-    loadn r5, #tela1
-    jmp gb_fim
-gb_tela2:
-    loadn r5, #tela2
-    jmp gb_fim
-gb_tela3:
-    loadn r5, #tela3
-    jmp gb_fim
-gb_tela4:
-    loadn r5, #tela4
-gb_fim:
-    pop r0
-    rts
