@@ -5,7 +5,7 @@ Inclui movimentação do personagem, obstáculos em movimento e mecânica de col
 
 Link do video explicativo : https://youtu.be/5b9k3Nvf9kQ?si=3U_l4RjKIozARcJa
 
-# Mecânicas do Jogo em Assembly ICMC — Explicação Detalhada
+# Mecânicas do Jogo 
 
 ## Movimentação do Jogador
 
