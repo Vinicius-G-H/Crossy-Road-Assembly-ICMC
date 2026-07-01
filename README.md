@@ -17,7 +17,7 @@ A cada branch executado, o contador é atualizado: se o branch foi tomado, o con
 
 O relatório exibido ao final (No próprio simulador) da execução contabiliza todos os branches encontrados, quantas previsões foram corretas e a taxa de acerto em porcentagem. A contagem é feita comparando a previsão registrada *antes* da execução com o resultado real observado *depois* da avaliação das flags — garantindo que o preditor não "veja o futuro" na hora de contabilizar os acertos.
 
-##Outnum
+## Outnum
 
 A instrução OUTNUM (opcode 54). 
 
