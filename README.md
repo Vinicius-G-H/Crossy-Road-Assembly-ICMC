@@ -26,6 +26,8 @@ case OUTNUM no STATE_DECODE — executa printf("%d", reg[rx]), imprimindo o valo
 
 OUTCHAR imprime o caractere ASCII do valor (útil para texto), mas não há como imprimir um número diretamente — você precisaria converter manualmente para dígitos ASCII no assembly. OUTNUM resolve isso em uma instrução, o que é muito útil para debug.
 
+Há um arquivo de teste cpuram.mif e sua versão em assembly (TesteCPU.asm) para demonstrar o funcionamento dessa função com o simulador, que imprimirá os seguintes números: 0, 42, 100, 65535 e 8
+
 # Mecânicas do Jogo 
 
 ## Movimentação do Jogador
