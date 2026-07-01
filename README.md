@@ -5,6 +5,27 @@ Inclui movimentação do personagem, obstáculos em movimento e mecânica de col
 
 Link do video explicativo : https://youtu.be/5b9k3Nvf9kQ?si=3U_l4RjKIozARcJa
 
+# Processador e funções:
+
+## Preditor de Branch — Saturating Counter de 2 Bits
+
+O simulador implementa um preditor de branch do tipo *saturating counter* de 2 bits, uma das técnicas clássicas de predição de desvio estudadas em arquitetura de computadores. O objetivo é antecipar, antes da execução de uma instrução de salto condicional (`JMP` ou `CALL`), se o branch será tomado ou não — informação que num pipeline real seria necessária para buscar a próxima instrução sem desperdiçar ciclos.
+
+O preditor é composto por uma tabela chamada BHT (*Branch History Table*) com 64 entradas, cada uma armazenando um contador que varia entre 0 e 3. Esses quatro valores representam quatro estados: *Fortemente Não-Tomado* (0), *Fracamente Não-Tomado* (1), *Fracamente Tomado* (2) e *Fortemente Tomado* (3). A previsão é simples: se o contador da entrada for maior ou igual a 2, o preditor prevê que o branch será tomado; caso contrário, prevê que não será. A entrada da tabela usada é determinada pelo endereço do `PC` no momento do branch, calculado como `PC % 64`.
+
+A cada branch executado, o contador é atualizado: se o branch foi tomado, o contador incrementa (saturando em 3); se não foi, decrementa (saturando em 0). O nome *saturating* vem exatamente desse comportamento — o valor não passa dos limites. A vantagem dos 2 bits sobre 1 bit é a robustez em loops: como é necessário errar duas vezes consecutivas para mudar de previsão, um loop que itera muitas vezes e depois termina erra apenas uma vez na saída, em vez de duas.
+
+O relatório exibido ao final (No próprio simulador) da execução contabiliza todos os branches encontrados, quantas previsões foram corretas e a taxa de acerto em porcentagem. A contagem é feita comparando a previsão registrada *antes* da execução com o resultado real observado *depois* da avaliação das flags — garantindo que o preditor não "veja o futuro" na hora de contabilizar os acertos.
+
+##Outnum
+
+A instrução OUTNUM (opcode 54). 
+
+#define OUTNUM 54 — declarado junto com as outras instruções de I/O.
+case OUTNUM no STATE_DECODE — executa printf("%d", reg[rx]), imprimindo o valor numérico decimal do registrador Rx.
+
+OUTCHAR imprime o caractere ASCII do valor (útil para texto), mas não há como imprimir um número diretamente — você precisaria converter manualmente para dígitos ASCII no assembly. OUTNUM resolve isso em uma instrução, o que é muito útil para debug.
+
 # Mecânicas do Jogo 
 
 ## Movimentação do Jogador
